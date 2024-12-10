@@ -1,0 +1,29 @@
+#from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
+from flasgger import Swagger, swag_from
+
+app = Flask(__name__)
+Swagger(app)
+products = {}  # In-memory storage
+
+@app.route('/products', methods=['GET'])
+@swag_from('swagger/register.yml')
+def list_products():
+    return jsonify(products), 200
+
+@app.route('/product/<int:product_id>', methods=['GET'])
+def get_product(product_id):
+    product = products.get(product_id)
+    if not product:
+        return jsonify({"message": "Product not found"}), 404
+    return jsonify(product), 200
+
+@app.route('/product', methods=['POST'])
+def add_product():
+    data = request.json
+    product_id = len(products) + 1
+    products[product_id] = data
+    return jsonify({"message": "Product added", "product_id": product_id}), 201
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5002)

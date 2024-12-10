@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  title: "Order Service API"
+  description: "Order service API for user"
+  version: "1.0.0"
+host: "localhost:5003"
+schemes:
+  - "http"
+paths:
+  /register:
+    post:
+      summary: "Ordering Products"
+      description: "Thank you For Ordering"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "User registered successfully"

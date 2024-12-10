@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  title: "Product Service API"
+  description: "API for Product Service"
+  version: "1.0.0"
+host: "localhost:5002"
+schemes:
+  - "http"
+paths:
+  /register:
+    post:
+      summary: "Product services deatils"
+      description: "Here are the details of Products"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "User registered successfully"
